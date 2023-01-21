@@ -1,0 +1,40 @@
+{{> zahlavi }}
+<h1 class="mx-3">Pojištěnci</h1>
+<div class="text-center">
+    <a class="btn btn-primary mb-4" onclick="location.href='/pojistenci/novy'">Nový pojištěnec</a>
+</div>
+{{#test}}
+    {{> notifikace }}
+{{/test}}
+<table class="table table-responsive table-bordered">
+    <thead class="table-light">
+    <tr>
+        <th>Jméno</th>
+        <th>Bydliště</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#seznamPojistenych}}
+        <tr>
+            <td><a class="link-primary" href="detail/{{id}}">{{jmeno}} {{prijmeni}}</a></td>
+            <td>{{uliceACislo}}, {{mesto}}</td>
+            <td>
+                <button class="btn btn-warning btn-sm tlacitkaVTabulce" onclick="location.href='/pojistenci/editovat/{{id}}'">Editovat</button>
+                <form style="display: inline;" method="POST" action="/pojistenci/smazat/{{id}}">
+                    <button class="btn btn-danger btn-sm tlacitkaVTabulce" onclick="return confirm('Opravdu si přejete smazat záznam?')">Odstranit</button>
+                </form>
+            </td>
+        </tr>
+    {{/seznamPojistenych}}
+    </tbody>
+</table>
+<div class="text-center">
+    <div class="btn-group btn-group-sm my-3" role="group">
+        {{#stranky}}
+            <a class="btn {{css}}" tabindex={{tabIndex}} href="{{url}}">{{text}}</a>
+        {{/stranky}}
+    </div>
+</div>
+{{> zapati }}
+

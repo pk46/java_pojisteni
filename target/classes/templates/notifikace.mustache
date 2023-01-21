@@ -1,0 +1,14 @@
+<div class="toast mb-5">
+    <div class="toast-header">
+        Notifikace
+    </div>
+    <div class="toast-body">
+        {{text_notifikace}}
+    </div>
+</div>
+<script>
+$(document).ready(function(){
+    $('.toast').toast({delay: 3000});
+    $('.toast').toast('show')
+});
+</script>

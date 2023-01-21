@@ -1,0 +1,65 @@
+{{> zahlavi }}
+<button class="btn btn-secondary mx-3 bilyTextVTlacitku" onclick="history.back();return false">Zpět</button>
+<div class="container-fluid my-5 infoBox">
+    <div class="row">
+        <div class="col-sm-2 px-0">
+            <img class="img-fluid border" src="../../images/blankFace.jpg" alt="fotografie uzivatele">
+        </div>
+        <div class="col">
+            <div class="my-3 sm-my-5" style="height:25px;">
+                <h5>{{pojistenec.jmeno}} {{pojistenec.prijmeni}}</h5>
+            </div>
+            <div>
+                <p>
+                    {{pojistenec.uliceACislo}}<br>
+                    {{pojistenec.mesto}}<br>
+                    {{pojistenec.psc}}
+                </p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="my-3 sm-my-5" style="height:25px;">
+            </div>
+            <div>
+                <p>
+                    {{pojistenec.email}}<br>
+                    {{pojistenec.telefon}}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<table class="table table-responsive table-bordered">
+    <thead class="table-light">
+    <tr>
+        <th>Pojištění</th>
+        <th>Částka</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#pojisteni}}
+        <tr>
+            <td><a class="link-primary" href="/pojisteni/detail/{{id}}">{{getTypPojisteniHodnota}}</a></td>
+            <td>{{castkaVHalerich}}</td>
+            <td>
+                <button class="btn btn-warning btn-sm tlacitkaVTabulce"
+                onClick="location.href='/pojisteni/editovat/{{id}}'">Editovat</button>
+                <form style="display: inline;" method="POST" action="/pojisteni/smazat/{{id}}">
+                    <button class="btn btn-danger btn-sm rounded tlacitkaVTabulce" onclick="return confirm('Opravdu si přejete smazat záznam?')">Odstranit</button>
+                </form>
+            </td>
+        </tr>
+    {{/pojisteni}}
+    </tbody>
+</table>
+<div class="text-center">
+    <div class="btn-group my-3" role="group">
+        <a class="btn btn-primary rounded" onClick="location.href='/pojisteni/nove/{{pojistenec.id}}'">Přidat pojištění</a>
+        <a class="btn btn-warning mx-3 rounded bilyTextVTlacitku" onclick="location.href='/pojistenci/editovat/{{pojistenec.id}}'">Editovat pojištěnce</a>
+    </div>
+    <form style="display: inline;" method="POST" action="/pojistenci/smazat/{{id}}">
+        <button class="btn btn-danger rounded" onclick="return confirm('Opravdu si přejete smazat záznam?')">Odstranit pojištěnce</button>
+    </form>
+</div>
+{{> zapati }}

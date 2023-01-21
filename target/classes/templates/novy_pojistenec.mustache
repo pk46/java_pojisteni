@@ -1,0 +1,50 @@
+{{> zahlavi }}
+<h1 class="mx-3">Nový pojištěnec</h1>
+<form id="needs-validation" novalidate="novalidate" method="post" action="/pojistenci/novy" enctype="application/x-www-form-urlencoded">
+    <div class="row">
+        <div class="form-group col-auto mb-4">
+            <label class="form-label mx-1" for="jmeno">Křestní jméno*</label>
+            <input class="form-control" type="text" id="jmeno" placeholder="Křestní jméno" name="jmeno" required>
+            <div class="invalid-feedback">Zadejte prosím křestní jméno.</div>
+        </div>
+        <div class="form-group col-auto mb-4">
+            <label class="form-label mx-1" for="prijmeni">Příjmení*</label>
+            <input class="form-control" type="text" id="prijmeni" placeholder="Příjmení" name="prijmeni" required>
+            <div class="invalid-feedback">Zadejte prosím příjmení.</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-auto mb-4">
+            <label class="form-label mx-1" for="email">Email*</label>
+            <input class="form-control" type="text" id="email" placeholder="Email" name="email" required>
+            <div class="invalid-feedback">Zadejte prosím platný email.</div>
+        </div>
+        <div class="form-group col-auto mb-4">
+            <label class="form-label mx-1" for="telefon">Telefon</label>
+            <input class="form-control" type="text" id="telefon" placeholder="Telefon" name="telefon">
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-auto mb-4">
+            <label class="form-label mx-1" for="ulice">Ulice a číslo popisné</label>
+            <input class="form-control" type="text" id="ulice" placeholder="Ulice a číslo popisné" name="uliceACislo">
+        </div>
+        <div class="form-group col-auto mb-4">
+            <label class="form-label mx-1" for="mesto">Město</label>
+            <input class="form-control" type="text" id="mesto" placeholder="Město" name="mesto">
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-auto mb-4">
+            <label class="form-label mx-1" for="psc">PSČ</label>
+            <input class="form-control" type="text" id="psc" placeholder="PSČ" name="psc">
+        </div>
+    </div>
+    <div class="row text">
+        <div>
+            <button class="btn btn-primary">Uložit</button>
+            <button class="btn btn-secondary mx-3" onclick="history.back();return false">Zrušit</button>
+        </div>
+    </div>
+</form>
+{{> zapati }}

@@ -1,0 +1,52 @@
+{{> zahlavi }}
+<h1 class="mx-3">{{title}}</h1>
+<form id="needs-validation" novalidate="novalidate" method="POST" action="/pojisteni/ulozit" enctype="application/x-www-form-urlencoded">
+    <input type="hidden" name="pojistenecId" value="{{pojisteni.pojistenec.id}}">
+    <input type="hidden" name="pojisteniId" value="{{pojisteni.id}}">
+    <div class="row">
+        <div class="form-group col-auto mb-4">
+            <label class="form-label mx-1" for="typPojisteni">Typ pojištění</label><br>
+            <select class="form-select" id="typPojisteni" name="typPojisteni" onchange="updateSelectBox();">
+                {{#typyPojisteni}}
+                    <option value="{{key}}" {{selected}}>{{name}}</option>
+                {{/typyPojisteni}}
+            </select>
+        </div>
+        <div class="form-group col-auto mb-4">
+            <label class="form-label mx-1" for="predmetPojisteni">Předmět pojištění*</label><br>
+            <select class="form-select" id="predmetPojisteni" name="predmetPojisteni">
+                {{#predmetPojisteni}}
+                    <option value="{{key}}" {{selected}}>{{name}}</option>
+                {{/predmetPojisteni}}
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-auto mb-4">
+            <label class="form-label mx-1" for="castkaVHalerich">Částka v haléřích*</label><br>
+            <input class="form-control" type="number" id="castkaVHalerich" placeholder="Částka v haléřích" name="castkaVHalerich" value="{{pojisteni.castkaVHalerich}}" required>
+            <div class="invalid-feedback">Částka je povinné pole.</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-auto mb-4">
+            <label class="form-label mx-1" for="platnostOd">Platnost od*</label>
+            <input class="form-control" type="date" onkeydown="return false" id="platnostOd" placeholder="Platnost od" name="platnostOd" value="{{pojisteni.platnostOd}}" required>
+            <div class="invalid-feedback">Platnost od je povinné pole.</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-auto mb-4">
+            <label class="form-label mx-1" for="platnostDo">Platnost do*</label>
+            <input class="form-control" type="date" onkeydown="return false" id="platnostDo" placeholder="Platnost do" name="platnostDo" value="{{pojisteni.platnostDo}}" required>
+            <div class="invalid-feedback">Platnost do je povinné pole.</div>
+        </div>
+    </div>
+    <div class="row text">
+        <div>
+            <button class="btn btn-primary">Uložit změny</button>
+            <button class="btn btn-secondary ml-3" onclick="history.back();return false">Zrušit</button>
+        </div>
+    </div>
+</form>
+{{> zapati }}
