@@ -16,11 +16,11 @@ public class Option {
         this.selected = selected ? "selected" : "";
     }
 
-    public static <T extends Enum<T>> List<Option> makeOptions(T[] values) {
-        return makeOptions(values, "");
+    public static <T extends Enum<T>> List<Option> vytvorHodnotySelectBoxu(T[] values) {
+        return vytvorHodnotySelectBoxu(values, "");
     }
 
-    public static <T extends Enum<T>> List<Option> makeOptions(final T[] values, final String selectedValue) {
+    public static <T extends Enum<T>> List<Option> vytvorHodnotySelectBoxu(final T[] values, final String selectedValue) {
         return Stream
                 .of(values)
                 .map(item -> new Option(item.name(), item.toString(), item.name().equals(selectedValue)))

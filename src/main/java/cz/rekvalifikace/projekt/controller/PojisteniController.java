@@ -39,22 +39,22 @@ public class PojisteniController {
     private PojistenecRepository pojistenecRepository;
 
     private Random random = new Random();
-    private static final String DATE_FORMAT = "dd.MM.yyyy";
+    private static final String FORMAT_DATA = "yyyy-MM-dd";
 
     @GetMapping(path = "/detail/{id}")
     public ModelAndView detailPojisteni(Map<String, Object> model, @PathVariable Long id) {
         Pojisteni pojisteni = repository.findById(id).get();
-        model.put("title", "Detail pojištění");
+        model.put("titulek", "Detail pojištění");
         model.put("pojisteni", pojisteni);
         return new ModelAndView("detail_pojisteni", model);
     }
 
     @GetMapping(path = "/nove/{pojistenecId}")
     public ModelAndView novePojisteni(Map<String, Object> model, @PathVariable Long pojistenecId) {
-        model.put("title", "Nove pojisteni");
+        model.put("titulek", "Nové pojištění");
         model.put("pojistenecId", pojistenecId);
-        model.put("typPojisteniOptions", Option.makeOptions(Pojisteni.Typ.values()));
-        model.put("predmetPojisteniOptions", Option.makeOptions(Pojisteni.MajetkovePojisteni.values()));
+        model.put("typPojisteniOptions", Option.vytvorHodnotySelectBoxu(Pojisteni.Typ.values()));
+        model.put("predmetPojisteniOptions", Option.vytvorHodnotySelectBoxu(Pojisteni.MajetkovePojisteni.values()));
         return new ModelAndView("nove_pojisteni", model);
     }
 
@@ -91,22 +91,22 @@ public class PojisteniController {
 
     private static LocalDate stringToDate(String datumACas) {
         String pouzeDatum = datumACas.substring(0, 10);
-        return LocalDate.parse(pouzeDatum, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        return LocalDate.parse(pouzeDatum, DateTimeFormatter.ofPattern(FORMAT_DATA));
     }
 
     @GetMapping(path = "/editovat/{id}")
     public ModelAndView editovatPojisteni(@PathVariable Long id, Map<String, Object> model) {
         Pojisteni pojisteni = repository.findById(id).get();
-        model.put("title", "Editace pojištění");
+        model.put("titulek", "Editace pojištění");
         model.put("pojisteni", pojisteni);
-        model.put("typyPojisteni", Option.makeOptions(Pojisteni.Typ.values(), pojisteni.getTypPojisteniKlic()));
+        model.put("typyPojisteni", Option.vytvorHodnotySelectBoxu(Pojisteni.Typ.values(), pojisteni.getTypPojisteniKlic()));
         if(pojisteni.getTypPojisteniKlic().equals("POJISTENI_MAJETKU")) {
             final List<Option> predmetOptions =
-                    Option.makeOptions(Pojisteni.MajetkovePojisteni.values(), pojisteni.getPredmetPojisteniKlic());
+                    Option.vytvorHodnotySelectBoxu(Pojisteni.MajetkovePojisteni.values(), pojisteni.getPredmetPojisteniKlic());
             model.put("predmetPojisteni", predmetOptions);
         } else {
             final List<Option> predmetOptions =
-                    Option.makeOptions(Pojisteni.ZdravotniPojisteni.values(), pojisteni.getPredmetPojisteniKlic());
+                    Option.vytvorHodnotySelectBoxu(Pojisteni.ZdravotniPojisteni.values(), pojisteni.getPredmetPojisteniKlic());
             model.put("predmetPojisteni", predmetOptions);
         }
 

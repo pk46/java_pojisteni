@@ -22,7 +22,7 @@ public class PrihlaseniController {
 
     @GetMapping(path = "/prihlaseni")
     public ModelAndView prihlaseni(Map<String, Object> model) {
-        model.put("title", "Přihlášení uživatele");
+        model.put("titulek", "Přihlášení uživatele");
         return new ModelAndView("prihlaseni");
     }
 

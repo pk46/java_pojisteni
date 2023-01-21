@@ -7,7 +7,7 @@ import java.util.Random;
 public class TestDataGenerator
 {
     private static final Random RANDOM = new Random();
-    private static final String[] PREFIXES = {"602", "608", "721"};
+    private static final String[] PREDCISLI = {"602", "608", "721"};
     public static Pojistenec vygenerujPojistence(int id) {
         return Pojistenec.builder()
                 .email("user"+id+"@projekt.cz")
@@ -22,7 +22,7 @@ public class TestDataGenerator
 
     private static String vygenerujTelefon() {
         StringBuilder telefon = new StringBuilder();
-        telefon.append(PREFIXES[RANDOM.nextInt(PREFIXES.length)]);
+        telefon.append(PREDCISLI[RANDOM.nextInt(PREDCISLI.length)]);
         for(int i = 0; i < 6; i++) {
             telefon.append(RANDOM.nextInt(10));
         }

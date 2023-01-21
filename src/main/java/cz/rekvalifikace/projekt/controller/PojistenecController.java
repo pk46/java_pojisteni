@@ -33,12 +33,12 @@ public class PojistenecController {
     private PojistenecRepository repository;
     @Autowired
     private PojisteniRepository pojisteniRepository;
-    private static final int PAGE_SIZE = 3;
+    private static final int POCET_NA_STRANKU = 3;
 
-    @GetMapping({"/{page}/{notification}", "/{page}"})
+    @GetMapping({"/{page}/{notifikace}", "/{page}"})
     public ModelAndView seznamPojistenych(HttpServletRequest request, Map<String, Object> model, @PathVariable int page,
-                                          @PathVariable(required = false) boolean notification) {
-        long pocetStran = (long)Math.ceil(pocetPojistenych()/(float)PAGE_SIZE);
+                                          @PathVariable(required = false) boolean notifikace) {
+        long pocetStran = (long)Math.ceil(pocetPojistenych()/(float) POCET_NA_STRANKU);
         List<Link> odkazyNaStranky = LongStream.range(1, pocetStran + 1)
                 .boxed()
                 .map(number -> new Link("/pojistenci/" + number, "" + number, number == page ? "btn-primary" : "btn-outline-primary", 0))
@@ -53,12 +53,12 @@ public class PojistenecController {
             odkazyNaStranky.add(0, new Link("/pojistenci/" + Math.max(1, page - 1), "Předchozí", "btn-outline-primary", 0));
             odkazyNaStranky.add(new Link("/pojistenci/" + Math.min(pocetStran, page + 1), "Následující", "btn-outline-primary", 0));
         }
-        model.put("title", "Seznam pojištěných");
+        model.put("titulek", "Seznam pojištěných");
         model.put("stranky", odkazyNaStranky);
         model.put("aktualniStranka", page-1);
-        model.put("seznamPojistenych", repository.findAll(PageRequest.of(page-1, PAGE_SIZE)));
-        model.put("text_notifikace", notification?"Pojištěnec byl uložen":"");
-        model.put("test", notification);
+        model.put("seznamPojistenych", repository.findAll(PageRequest.of(page-1, POCET_NA_STRANKU)));
+        model.put("text_notifikace", notifikace?"Pojištěnec byl uložen":"");
+        model.put("test", notifikace);
         return new ModelAndView("seznam_pojistenych", model);
     }
 
@@ -69,7 +69,7 @@ public class PojistenecController {
     @GetMapping(path = "/detail/{id}")
     public ModelAndView detailPojistence(Map<String, Object> model, @PathVariable Long id) {
         Pojistenec pojistenec = repository.findById(id).get();
-        model.put("title", "Detail pojištěnce");
+        model.put("titulek", "Detail pojištěnce");
         model.put("pojistenec", pojistenec);
         Collection<Pojisteni> pojisteni = pojisteniRepository.findByPojistenecId(id);
         model.put("pojisteni", pojisteni);
@@ -78,7 +78,7 @@ public class PojistenecController {
 
     @GetMapping(path = "/novy")
     public ModelAndView novyPojistenec(Map<String, Object> model) {
-        model.put("title", "Nový pojištěncec");
+        model.put("titulek", "Nový pojištěncec");
         return new ModelAndView("novy_pojistenec", model);
     }
 
@@ -112,7 +112,7 @@ public class PojistenecController {
 
     @GetMapping(path = "/editovat/{id}")
     public ModelAndView editovatPojistence(@PathVariable Long id, Map<String, Object> model) {
-        model.put("title", "Editace pojištěnce");
+        model.put("titulek", "Editace pojištěnce");
         model.put("pojistenec", repository.findById(id).get());
         return new ModelAndView("editace_pojisteneho", model);
     }
