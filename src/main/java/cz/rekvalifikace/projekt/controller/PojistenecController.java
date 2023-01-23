@@ -34,6 +34,7 @@ public class PojistenecController {
     @Autowired
     private PojisteniRepository pojisteniRepository;
     private static final int POCET_NA_STRANKU = 3;
+    private String textNotifikace;
 
     @GetMapping({"/{page}/{notifikace}", "/{page}"})
     public ModelAndView seznamPojistenych(HttpServletRequest request, Map<String, Object> model, @PathVariable int page,
@@ -57,8 +58,8 @@ public class PojistenecController {
         model.put("stranky", odkazyNaStranky);
         model.put("aktualniStranka", page-1);
         model.put("seznamPojistenych", repository.findAll(PageRequest.of(page-1, POCET_NA_STRANKU)));
-        model.put("text_notifikace", notifikace?"Pojištěnec byl uložen":"");
-        model.put("test", notifikace);
+        model.put("text_notifikace", notifikace? textNotifikace:"");
+        model.put("notify", notifikace);
         return new ModelAndView("seznam_pojistenych", model);
     }
 
@@ -93,6 +94,7 @@ public class PojistenecController {
                 .telefon(pojistenecDto.getTelefon())
                 .mesto(pojistenecDto.getMesto())
                 .build());
+        textNotifikace = "Pojištěnec byl uložen";
         return new RedirectView("/pojistenci/1/true");
     }
 
@@ -107,7 +109,8 @@ public class PojistenecController {
     @PostMapping(path = "/smazat/{id}")
     public RedirectView smazatPojistence(@PathVariable Long id) {
         repository.deleteById(id);
-        return new RedirectView("/pojistenci/1");
+        textNotifikace = "Pojištěnec vymazán";
+        return new RedirectView("/pojistenci/1/true");
     }
 
     @GetMapping(path = "/editovat/{id}")
