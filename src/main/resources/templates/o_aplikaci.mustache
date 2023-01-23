@@ -1,0 +1,30 @@
+{{> zahlavi }}
+<article class="mx-3">
+    <header>
+        <h2>O projektu</h2>
+    </header>
+    <p>Tento projekt byl vytvořen jako závěrečná práce rekvalifikačního kurzu <a href="https://www.itnetwork.cz/prace-a-podnikani-v-it/rekvalifikacni-kurzy/rekvalifikacni-kurzy-java/" target="_blank" class="external">"Programátor WWW aplikací Java".</a> V projektu byly použity následující tenchologie:</p>
+    <p>
+    <ul>
+        <li>Java + Spring Boot</li>
+        <li>HTML + Mustache</li>
+        <li>Javascript</li>
+        <li>Bootstrap, CSS</li>
+        <li>MySQL</li>
+    </ul>
+    <p>V projektu chybí část s registrací uživatele, přihlášení a odhlášení a tudíž i uživatelské role. Tuto část jsem měl téměř hotovou,
+        ale nedokázal jsem zprovoznit odhlašování, a proto jsem ji do výsledného projektu nezahrnul.
+    </p>
+    <h2>Návod na použití generátoru pojištěných a pojištění</h2>
+    <p>Aplikace obsahuje dva endpointy pro automatické vygenerování pojištěných a k nim přiřazených pojištění. Původně to bylo určeno pouze
+        pro testování při vývoji, ale nakonec jsem to nechal i ve finální verzi.</p>
+    <p>
+    <ol>
+        <li>Vytvořte databázi s názvem "pojistovna"</li>
+        <li>Navštivte endpoint <a href="/pojistenci/vygeneruj-pojistence" target="_blank" class="external">"/pojistenci/vygeneruj-pojistence"</a></li>
+        <li>Navštivte endopoint <a href="/pojisteni/vygeneruj-pojisteni" target="_blank" class="external">"/pojisteni/vygeneruj-pojisteni"</a></li>
+    </ol>
+    <p>Oba endpointy skončí chybou, avšak na pozadí dojde k vygenerování pojištěnců a pojištěných do databáze. </p>
+    <p>Rád bych poděkoval všem lektorům a autorům kurzu. Hodně jsem se naučil a věřím, že se mi podaří díky vám nastartovat kariéru programátora.<br><br>Pavel Kupčík</p>
+</article>
+{{> zapati }}
